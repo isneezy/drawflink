@@ -1,13 +1,16 @@
 import consola from 'consola'
-import express from 'express'
+import express, { json } from 'express'
+import register from './routes';
 
 const app = express()
 
 const port = process.env.PORT || 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
+// // Parse JSON body
+app.use(json())
+
+// configure routes
+register(app)
 
 app.listen(port, () => {
   consola.info(`Server started at http://localhost:${port}`)
