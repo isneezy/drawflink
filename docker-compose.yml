@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  api:
+    image: isneezy/url-shortener
+    command: ['yarn', 'dev']
+    build:
+      context: backend
+    env_file:
+      - .env
+    environment:
+      WAIT_HOSTS: mongodb:27017
+    ports:
+    - 3000:3000
+    volumes:
+      - ./backend:/app
+  mongodb:
+    image: mongo
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DB_USERNAME}"
+    volumes:
+    - mongodata:/data/db
+volumes:
+  mongodata:
