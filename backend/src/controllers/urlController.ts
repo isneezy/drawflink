@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import consola from 'consola'
 import * as service from '../services/urlShortenerService'
+import {Url} from "../models";
 
 export function shortenUrl(req: Request, res: Response) {
   const { url } = req.body
@@ -13,4 +14,11 @@ export function shortenUrl(req: Request, res: Response) {
         res.status(500).json({ error: 'An error occurred while serving your request.'})
       }
     })
+}
+
+export function listUrls(req: Request, res: Response) {
+  Url.find({}).exec((err, docs) => {
+    if (err) res.status(500).json({ error: `An error occurred while processsing your request ${err.message}`})
+    res.json(docs)
+  })
 }
