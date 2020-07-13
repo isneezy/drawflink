@@ -17,8 +17,8 @@ export function shortenUrl(req: Request, res: Response) {
 }
 
 export function listUrls(req: Request, res: Response) {
-  Url.find({}).exec((err, docs) => {
-    if (err) res.status(500).json({ error: `An error occurred while processsing your request ${err.message}`})
-    res.json(docs)
+  Url.paginate({}, req.pageOptions, (err, result) => {
+    if (err) res.status(500).json({ error: `An error occurred while processing your request ${err.message}`})
+    res.json(result)
   })
 }

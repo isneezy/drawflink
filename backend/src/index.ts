@@ -3,6 +3,7 @@ import express, { json } from 'express'
 import morgan from 'morgan'
 import register from './routes';
 import mongoose from "mongoose";
+import paginationMiddleware from "./middlewares/paginationMiddleware";
 
 const app = express()
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000
 // Parse JSON body
 app.use(json())
 app.use(morgan('combined'))
+app.use(paginationMiddleware())
 
 mongoose.connect(
   'mongodb://mongodb:27017/url-shorten',
