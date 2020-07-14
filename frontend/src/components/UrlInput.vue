@@ -55,6 +55,9 @@ export default defineComponent({
   border: 2px var(--color-gray-300) solid;
   border-radius: 3px;
 }
+.url-input--focused {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)
+}
 .url-input input {
   flex: 1 1;
   padding: 8px 10px;

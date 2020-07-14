@@ -38,7 +38,7 @@ export default defineComponent({
   --color-teal-900: #234e52;
 
   --color-body: var(--color-gray-800);
-  --color-bg: var(--color-gray-100);
+  --color-bg: var(--color-gray-200);
 }
 
 html {
@@ -49,6 +49,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-body);
   background-color: var(--color-bg);
+  font-size: 0.875rem;
 }
 
 /* Change Autocomplete styles in Chrome*/
