@@ -1,5 +1,6 @@
 import consola from 'consola'
 import express, { json } from 'express'
+import cors from 'cors'
 import morgan from 'morgan'
 import register from './routes';
 import mongoose from "mongoose";
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000
 
 // Parse JSON body
 app.use(json())
+app.use(cors())
 app.use(morgan('combined'))
 app.use(paginationMiddleware())
 
