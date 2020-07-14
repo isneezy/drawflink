@@ -51,6 +51,20 @@ html {
   background-color: var(--color-bg);
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1000px var(--color-white) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .container {
   margin: 0 auto;
   max-width: 920px;

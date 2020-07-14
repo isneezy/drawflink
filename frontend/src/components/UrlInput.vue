@@ -1,6 +1,8 @@
 <template>
   <div class="url-input" :class="{ 'url-input--focused': focused }" @keyup.enter="onSubmit">
     <input
+      id="url-input"
+      name="url"
       v-model="inputValue"
       :disabled="busy"
       placeholder="Enter your original URL eg. https://primarybid.com/static/TermsAndConditions.pdf"
