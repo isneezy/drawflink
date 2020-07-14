@@ -1,9 +1,11 @@
 <template>
-  <div @keyup.enter="onSubmit">
+  <div class="url-input" :class="{ 'url-input--focused': focused }" @keyup.enter="onSubmit">
     <input
       v-model="inputValue"
       :disabled="busy"
       placeholder="Enter your original URL eg. https://primarybid.com/static/TermsAndConditions.pdf"
+      @focus="focused = true"
+      @blur="focused = false"
     />
     <button :disabled="busy" @click="onSubmit">Shorten URL</button>
   </div>
@@ -17,6 +19,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const inputValue = ref<string>('')
+    const focused = ref(false)
     watch(
       () => props.value,
       (value) => (inputValue.value = value)
@@ -24,7 +27,46 @@ export default defineComponent({
     function onSubmit() {
       emit('shorten', inputValue.value)
     }
-    return { inputValue, onSubmit }
+    return { inputValue, onSubmit, focused }
   }
 })
 </script>
+<style scoped>
+.url-input {
+  display: flex;
+  border: 2px var(--color-gray-300) solid;
+  border-radius: 3px;
+}
+.url-input input {
+  flex: 1 1;
+  padding: 8px 10px;
+  appearance: none;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+.url-input input:focus {
+  outline: none;
+}
+.url-input.url-input--focused {
+  border-color: var(--color-teal-600);
+}
+
+.url-input button {
+  cursor: pointer;
+  appearance: none;
+  color: var(--color-white);
+  background-color: var(--color-teal-600);
+  border-radius: 0 3px 3px 0;
+  border: none;
+  padding: 4px 12px;
+  display: block;
+}
+.url-input.url-input--focused button {
+  border-radius: 0;
+}
+.url-input button:hover, .url-input button:focus {
+  outline: none;
+  background-color: var(--color-teal-700);
+}
+</style>

@@ -1,16 +1,17 @@
 <template>
   <div class="home">
-    <h1>dwarflink</h1>
-    <url-input @shorten="shortenUrl" />
-    <h2>Recent urls</h2>
-    <table>
-      <thead>
+    <div class="wrapper">
+      <h1>dwarflink</h1>
+      <url-input class="home__url-input" @shorten="shortenUrl" />
+      <h2>Recent urls</h2>
+      <table style="display: none">
+        <thead>
         <tr>
           <th>Url</th>
           <th>Short Url</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr v-for="url in urls" :key="url._id">
           <td>
             <a :href="url.url" target="_blank">{{ url.url }}</a>
@@ -19,8 +20,9 @@
             <a :href="url.shortUrl" target="_blank">{{ url.shortCode }}</a>
           </td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -45,3 +47,19 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.home__url-input {
+  max-width: 520px;
+  margin: 0 auto;
+}
+.wrapper {
+  width: 100%;
+}
+</style>
