@@ -2,24 +2,24 @@
   <div class="home">
     <div class="wrapper">
       <h1>dwarflink</h1>
-      <url-input class="home__url-input" @shorten="shortenUrl" />
+      <url-input class="home__url-input" :busy="waiting('urls.shorten')" @shorten="shortenUrl" />
       <h2>Recent urls</h2>
       <table style="display: none">
         <thead>
-        <tr>
-          <th>Url</th>
-          <th>Short Url</th>
-        </tr>
+          <tr>
+            <th>Url</th>
+            <th>Short Url</th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="url in urls" :key="url._id">
-          <td>
-            <a :href="url.url" target="_blank">{{ url.url }}</a>
-          </td>
-          <td>
-            <a :href="url.shortUrl" target="_blank">{{ url.shortCode }}</a>
-          </td>
-        </tr>
+          <tr v-for="url in urls" :key="url._id">
+            <td>
+              <a :href="url.url" target="_blank">{{ url.url }}</a>
+            </td>
+            <td>
+              <a :href="url.shortUrl" target="_blank">{{ url.shortCode }}</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -35,7 +35,7 @@ export default defineComponent({
   name: 'Home',
   components: { UrlInput },
   setup() {
-    const { shortUrls } = useStore()
+    const { shortUrls, waiting } = useStore()
     const { urls, shortenUrl } = shortUrls
     const { query } = userRouter()
 
@@ -43,7 +43,7 @@ export default defineComponent({
       shortUrls.fetchRecentUrls(query.value)
     })
 
-    return { urls, shortenUrl }
+    return { urls, shortenUrl, waiting }
   }
 })
 </script>

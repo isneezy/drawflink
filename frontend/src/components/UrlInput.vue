@@ -1,20 +1,35 @@
 <template>
-  <div class="url-input" :class="{ 'url-input--focused': focused }" @keyup.enter="onSubmit">
-    <input
-      id="url-input"
-      name="url"
-      v-model="inputValue"
-      :disabled="busy"
-      placeholder="Enter your original URL eg. https://primarybid.com/static/TermsAndConditions.pdf"
-      @focus="focused = true"
-      @blur="focused = false"
-    />
-    <button :disabled="busy" @click="onSubmit">Shorten URL</button>
+  <div>
+    <div
+      class="url-input"
+      :class="{ 'url-input--focused': focused, 'url-input--busy': busy }"
+      @keyup.enter="onSubmit"
+    >
+      <input
+        id="url-input"
+        name="url"
+        v-model="inputValue"
+        :disabled="busy"
+        placeholder="Enter your original URL eg. https://primarybid.com/static/TermsAndConditions.pdf"
+        @focus="focused = true"
+        @blur="focused = false"
+      />
+      <button :disabled="busy" @click="onSubmit">
+        Shorten URL
+      </button>
+      <loading-spinner
+        class="url-input__loading-spinner"
+        v-if="busy"
+        fill="var(--color-teal-500)"
+      />
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from '@vue/composition-api'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 export default defineComponent({
+  components: { LoadingSpinner },
   props: {
     value: { type: String, default: '' },
     busy: { type: Boolean, default: false }
@@ -35,6 +50,7 @@ export default defineComponent({
 </script>
 <style scoped>
 .url-input {
+  position: relative;
   display: flex;
   border: 2px var(--color-gray-300) solid;
   border-radius: 3px;
@@ -50,6 +66,9 @@ export default defineComponent({
 .url-input input:focus {
   outline: none;
 }
+.url-input input:disabled {
+  background-color: var(--color-gray-100);
+}
 .url-input.url-input--focused {
   border-color: var(--color-teal-600);
 }
@@ -64,11 +83,23 @@ export default defineComponent({
   padding: 4px 12px;
   display: block;
 }
+.url-input button:disabled {
+  background-color: var(--color-gray-500);
+}
 .url-input.url-input--focused button {
   border-radius: 0;
 }
-.url-input button:hover, .url-input button:focus {
+.url-input button:hover:enabled,
+.url-input button:focus {
   outline: none;
   background-color: var(--color-teal-700);
+}
+
+.url-input__loading-spinner {
+  position: absolute;
+  height: 64px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
