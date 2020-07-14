@@ -3,9 +3,15 @@ import { Dictionary } from 'vue-router/types/router'
 import axios from 'axios'
 import { WaitStore } from '@/store/createWaitStore'
 
-export interface PaginatedResponse<T> {
+export interface PaginatedResponse<T> extends Pagination{
   docs: T[]
 }
+export interface Pagination {
+  limit: number
+  page: number
+  totalPages: number
+}
+
 export interface Url {
   _id: string
   url: string
@@ -14,7 +20,8 @@ export interface Url {
 }
 
 export interface ShortUrlState {
-  urls: Url[]
+  urls: Url[],
+  pagination: Pagination
 }
 
 interface ShortUrlStoreOptions {
@@ -25,7 +32,8 @@ export default function createShortUrlsStore({
   waitStore
 }: ShortUrlStoreOptions) {
   const state = reactive<ShortUrlState>({
-    urls: []
+    urls: [],
+    pagination: {limit: 10, page: 1, totalPages: 1 }
   })
 
   function fetchRecentUrls(params?: Dictionary<string | (string | null)[]>) {
@@ -34,6 +42,9 @@ export default function createShortUrlsStore({
       .get<PaginatedResponse<Url>>('http://localhost:3000/api/urls', { params })
       .then((value) => {
         state.urls = value.data.docs
+        state.pagination.limit = value.data.limit
+        state.pagination.page = value.data.page
+        state.pagination.totalPages = value.data.totalPages
       })
       .finally(() => waitStore.waitEnd('urls.index'))
   }

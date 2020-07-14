@@ -71,4 +71,35 @@ select:-webkit-autofill:focus {
   max-width: 920px;
   padding: 0 8px;
 }
+
+.pagination {
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 10px;
+}
+.pagination li {
+  display: inline-flex;
+  align-items: center;
+  margin-left: -1px;
+}
+.pagination li a:focus {
+  outline: none;
+}
+.pagination li:first-child a{
+  border-radius: 3px 0 0 3px;
+}
+.pagination li:last-child a{
+  border-radius: 0 3px 3px 0;
+}
+.pagination li a {
+  padding: .5rem 1rem;
+  border: 1px solid var(--color-gray-300);
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+.pagination li.active a {
+  color: var(--color-teal-500);
+  font-weight: 600;
+}
 </style>
