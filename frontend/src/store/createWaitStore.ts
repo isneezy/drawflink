@@ -1,4 +1,4 @@
-import {reactive} from '@vue/composition-api'
+import { reactive } from '@vue/composition-api'
 
 export interface WaitState {
   waiting: string[]
@@ -17,7 +17,10 @@ export default function createWaitStore() {
   }
 
   function waiting(...names: string[]): boolean {
-    const result = names.reduce((includes, name) => includes || state.waiting.includes(name), false)
+    const result = names.reduce(
+      (includes, name) => includes || state.waiting.includes(name),
+      false
+    )
     return result
   }
 
