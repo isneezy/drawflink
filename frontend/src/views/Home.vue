@@ -26,7 +26,7 @@ import VuePaginate from 'vuejs-paginate'
 import UrlInput from '@/components/UrlInput.vue'
 import ShortUrlList from '@/components/ShortUrlList.vue'
 import Logo from '@/components/Logo.vue'
-import {defineComponent, onMounted, watch} from '@vue/composition-api'
+import { defineComponent, onMounted, watch } from '@vue/composition-api'
 import useStore from '@/composables/useStore'
 import userRouter from '@/composables/userRouter'
 export default defineComponent({

@@ -3,7 +3,7 @@ import { Dictionary } from 'vue-router/types/router'
 import axios from 'axios'
 import { WaitStore } from '@/store/createWaitStore'
 
-export interface PaginatedResponse<T> extends Pagination{
+export interface PaginatedResponse<T> extends Pagination {
   docs: T[]
 }
 export interface Pagination {
@@ -20,7 +20,7 @@ export interface Url {
 }
 
 export interface ShortUrlState {
-  urls: Url[],
+  urls: Url[]
   pagination: Pagination
 }
 
@@ -33,7 +33,7 @@ export default function createShortUrlsStore({
 }: ShortUrlStoreOptions) {
   const state = reactive<ShortUrlState>({
     urls: [],
-    pagination: {limit: 10, page: 1, totalPages: 1 }
+    pagination: { limit: 10, page: 1, totalPages: 1 }
   })
 
   function fetchRecentUrls(params?: Dictionary<string | (string | null)[]>) {
