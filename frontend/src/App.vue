@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
+  <provider class="container">
     <router-view />
-  </div>
+  </provider>
 </template>
+<script>
+import { defineComponent } from '@vue/composition-api'
+import Provider from '@/components/Provider'
+export default defineComponent({
+  components: { Provider }
+})
+</script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style lang="css">
+@import 'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css';
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap';
+
+:root {
+  --color-body: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+html {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-body);
+  background-color: rgba(43, 43, 43, 0.1);
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.container {
+  margin: 0 auto;
+  max-width: 920px;
 }
 </style>
