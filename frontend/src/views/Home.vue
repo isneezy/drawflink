@@ -8,7 +8,7 @@
         @shorten="shortenUrl"
       />
       <h2>Recent urls</h2>
-      <short-url-list :urls="urls" />
+      <short-url-list :urls="urls" :busy="waiting('urls.index')" />
     </div>
   </div>
 </template>
@@ -38,10 +38,7 @@ export default defineComponent({
 
 <style scoped>
 .home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  margin-top: 320px;
 }
 .home__url-input {
   max-width: 520px;
